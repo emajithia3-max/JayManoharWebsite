@@ -531,21 +531,76 @@
         // Add error handling for model loading
         document.addEventListener('DOMContentLoaded', function() {
             const modelViewers = document.querySelectorAll('model-viewer');
+            let errorCount = 0;
 
             modelViewers.forEach((viewer, index) => {
                 viewer.addEventListener('load', () => {
                     console.log(`Model ${index + 1} loaded successfully`);
+                    const loadingIndicator = viewer.querySelector('.loading-indicator');
+                    if (loadingIndicator) {
+                        loadingIndicator.style.display = 'none';
+                    }
                 });
 
                 viewer.addEventListener('error', (event) => {
+                    errorCount++;
                     console.error(`Error loading model ${index + 1}:`, event);
                     const loadingIndicator = viewer.querySelector('.loading-indicator');
                     if (loadingIndicator) {
-                        loadingIndicator.textContent = 'Failed to load model';
+                        loadingIndicator.innerHTML = '⚠️ CORS Error<br><small style="font-size: 0.8rem;">See console for details</small>';
                         loadingIndicator.style.color = '#ff4444';
                     }
+
+                    // Show CORS help banner after first error
+                    if (errorCount === 1) {
+                        showCORSHelp();
+                    }
                 });
+
+                // Test if model can be fetched
+                setTimeout(() => {
+                    const src = viewer.getAttribute('src');
+                    fetch(src, { mode: 'cors' })
+                        .then(response => {
+                            if (!response.ok) {
+                                console.error(`HTTP ${response.status} for model ${index + 1}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`CORS Error for model ${index + 1}:`, error.message);
+                            console.log(`%cFix: Add CORS headers to R2 bucket`, 'color: #00d4ff; font-weight: bold; font-size: 14px;');
+                        });
+                }, 1000);
             });
+
+            function showCORSHelp() {
+                const banner = document.createElement('div');
+                banner.id = 'cors-help-banner';
+                banner.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 0.75rem;
+                    box-shadow: 0 8px 32px rgba(255, 68, 68, 0.4);
+                    z-index: 10000;
+                    max-width: 90%;
+                    text-align: center;
+                    animation: slideDown 0.5s ease-out;
+                `;
+                banner.innerHTML = `
+                    <strong>⚠️ CORS Error Detected</strong><br>
+                    <small style="font-size: 0.85rem;">Models cannot load due to missing CORS headers on R2 bucket</small><br>
+                    <button onclick="document.getElementById('cors-help-banner').remove(); document.getElementById('cors-solution').style.display='block';"
+                            style="margin-top: 0.5rem; padding: 0.4rem 1rem; background: white; color: #cc0000; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
+                        Show Solution
+                    </button>
+                `;
+                document.body.appendChild(banner);
+            }
 
             // Add smooth scroll behavior
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -568,5 +623,99 @@
             });
         });
     </script>
+
+    <style>
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        #cors-solution {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            border: 2px solid var(--accent-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 10001;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        #cors-solution h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        #cors-solution code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        #cors-solution pre {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        #cors-solution ol {
+            margin-left: 1.5rem;
+            line-height: 2;
+        }
+
+        #cors-solution button {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+    </style>
+
+    <div id="cors-solution">
+        <h3>🔧 How to Fix CORS Error</h3>
+        <p>Your R2 bucket needs CORS configuration to allow web browsers to load the 3D models.</p>
+
+        <ol>
+            <li>Log in to <strong>Cloudflare Dashboard</strong></li>
+            <li>Go to <strong>R2 → Your Bucket</strong></li>
+            <li>Click <strong>Settings</strong> tab</li>
+            <li>Scroll to <strong>CORS Policy</strong></li>
+            <li>Add this configuration:</li>
+        </ol>
+
+        <pre><code>[
+  {
+    "AllowedOrigins": ["*"],
+    "AllowedMethods": ["GET"],
+    "AllowedHeaders": ["*"],
+    "ExposeHeaders": [],
+    "MaxAgeSeconds": 3600
+  }
+]</code></pre>
+
+        <p><strong>Or use the Cloudflare API:</strong></p>
+        <pre><code>wrangler r2 bucket cors put YOUR_BUCKET_NAME --cors-config cors.json</code></pre>
+
+        <button onclick="document.getElementById('cors-solution').style.display='none'">Close</button>
+    </div>
 </body>
 </html>
