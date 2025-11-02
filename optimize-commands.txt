@@ -1,0 +1,68 @@
+FTC Robot Model Optimization Commands
+=====================================
+
+STEP 1: Install gltf-transform
+-------------------------------
+npm install -g @gltf-transform/cli
+
+
+STEP 2: Navigate to your models directory
+------------------------------------------
+cd /Users/eeshmajithia/Downloads/___-
+
+
+STEP 3: Create output directory
+--------------------------------
+mkdir optimized
+
+
+STEP 4: Run optimization commands
+----------------------------------
+
+# Optimize Lebot James (495 MB → ~25 MB)
+gltf-transform optimize lebot-james.gltf optimized/lebot-james.glb --compress draco --texture-compress webp
+
+# Optimize Thunder (865 MB → ~40 MB)
+gltf-transform optimize thunder.gltf optimized/thunder.glb --compress draco --texture-compress webp
+
+# Optimize Volt (718 MB → ~35 MB)
+gltf-transform optimize volt-assembly-extended.gltf optimized/volt-assembly-extended.glb --compress draco --texture-compress webp
+
+# Optimize Fiber Eel (678 MB → ~30 MB)
+gltf-transform optimize fiber-eel.gltf optimized/fiber-eel.glb --compress draco --texture-compress webp
+
+
+STEP 5: Upload to R2 bucket
+----------------------------
+After optimization, upload the files from the "optimized" folder to your Cloudflare R2 bucket:
+- optimized/lebot-james.glb
+- optimized/thunder.glb
+- optimized/volt-assembly-extended.glb
+- optimized/fiber-eel.glb
+
+
+STEP 6: Update index.html
+--------------------------
+Change the model URLs in index.html from:
+  https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.gltf
+To:
+  https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.glb
+
+(Do this for all 4 models)
+
+
+ONE-LINER (Run all at once):
+-----------------------------
+cd /Users/eeshmajithia/Downloads/___- && mkdir -p optimized && gltf-transform optimize lebot-james.gltf optimized/lebot-james.glb --compress draco --texture-compress webp && gltf-transform optimize thunder.gltf optimized/thunder.glb --compress draco --texture-compress webp && gltf-transform optimize volt-assembly-extended.gltf optimized/volt-assembly-extended.glb --compress draco --texture-compress webp && gltf-transform optimize fiber-eel.gltf optimized/fiber-eel.glb --compress draco --texture-compress webp && echo "✅ Done! Check the 'optimized' folder"
+
+
+TROUBLESHOOTING:
+----------------
+If you get "command not found":
+  npm install -g @gltf-transform/cli
+
+If Node.js is not installed:
+  Visit: https://nodejs.org/ and download the installer
+
+Expected optimization time:
+  ~2-5 minutes per model (depending on your computer)
