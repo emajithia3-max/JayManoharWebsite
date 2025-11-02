@@ -390,16 +390,6 @@
         <header role="banner">
             <h1>FTC Robot Portfolio</h1>
             <p class="subtitle">Interactive 3D Showcase of Competition Robots</p>
-
-            <div style="max-width: 800px; margin: 1.5rem auto; padding: 1rem 1.5rem; background: rgba(255, 170, 0, 0.15); border-left: 4px solid #ffaa00; border-radius: 0.5rem; text-align: left;">
-                <strong style="color: #ffaa00;">⚠️ Important: Model File Sizes</strong>
-                <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                    These are high-fidelity CAD models (500-800MB each). Most browsers will crash trying to load them directly.
-                    <strong>We recommend downloading</strong> the models and viewing them in dedicated 3D software like
-                    <a href="https://www.blender.org/" target="_blank" style="color: var(--accent-primary);">Blender</a> or
-                    a GLTF viewer. Click the download button on each card.
-                </p>
-            </div>
         </header>
 
         <main role="main">
@@ -408,7 +398,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-1-name">
                     <div class="viewer-container">
                         <model-viewer
-                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.gltf"
+                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.glb"
                             alt="3D model of Lebot James FTC robot"
                             auto-rotate
                             camera-controls
@@ -416,22 +406,14 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
+                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
-                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.gltf" download class="load-model-btn" style="text-decoration: none;">
-                                    <div class="load-icon">⬇</div>
-                                    <div>Download Model</div>
-                                    <small style="font-size: 0.8rem; opacity: 0.9;">495 MB GLTF</small>
-                                </a>
-                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
-                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
-                                </button>
-                            </div>
+                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -462,7 +444,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-2-name">
                     <div class="viewer-container">
                         <model-viewer
-                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/thunder.gltf"
+                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/thunder.glb"
                             alt="3D model of Thunder FTC robot"
                             auto-rotate
                             camera-controls
@@ -470,22 +452,14 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
+                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
-                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/thunder.gltf" download class="load-model-btn" style="text-decoration: none;">
-                                    <div class="load-icon">⬇</div>
-                                    <div>Download Model</div>
-                                    <small style="font-size: 0.8rem; opacity: 0.9;">865 MB GLTF</small>
-                                </a>
-                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
-                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
-                                </button>
-                            </div>
+                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -515,7 +489,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-3-name">
                     <div class="viewer-container">
                         <model-viewer
-                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/volt-assembly-extended.gltf"
+                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/volt.glb"
                             alt="3D model of Volt FTC robot"
                             auto-rotate
                             camera-controls
@@ -523,22 +497,14 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
+                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
-                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/volt-assembly-extended.gltf" download class="load-model-btn" style="text-decoration: none;">
-                                    <div class="load-icon">⬇</div>
-                                    <div>Download Model</div>
-                                    <small style="font-size: 0.8rem; opacity: 0.9;">718 MB GLTF</small>
-                                </a>
-                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
-                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
-                                </button>
-                            </div>
+                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -568,7 +534,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-4-name">
                     <div class="viewer-container">
                         <model-viewer
-                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/fiber-eel.gltf"
+                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/fiber-eel.glb"
                             alt="3D model of Fiber Eel FTC robot concept"
                             auto-rotate
                             camera-controls
@@ -576,22 +542,14 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
+                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
-                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/fiber-eel.gltf" download class="load-model-btn" style="text-decoration: none;">
-                                    <div class="load-icon">⬇</div>
-                                    <div>Download Model</div>
-                                    <small style="font-size: 0.8rem; opacity: 0.9;">678 MB GLTF</small>
-                                </a>
-                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
-                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
-                                </button>
-                            </div>
+                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -618,86 +576,21 @@
         </main>
 
         <footer role="contentinfo">
-            <div style="max-width: 900px; margin: 0 auto 2rem; padding: 2rem; background: var(--bg-card); border-radius: 1rem; border: 1px solid var(--border-color); text-align: left;">
-                <h3 style="color: var(--accent-primary); margin-bottom: 1rem;">💡 How to Optimize Models for Web</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    Your current models are 500-800MB each - too large for browsers. Here's how to create web-friendly versions:
-                </p>
-
-                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Using gltf-transform (Recommended)</h4>
-                <pre style="background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.9rem;"><code># Install
-npm install -g @gltf-transform/cli
-
-# Optimize with Draco compression
-gltf-transform optimize lebot-james.gltf lebot-james-web.glb \
-  --compress draco \
-  --texture-compress webp
-
-# Target: Reduce 500MB → 20-50MB</code></pre>
-
-                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Using Blender</h4>
-                <ol style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
-                    <li>Open model in <a href="https://www.blender.org/" target="_blank" style="color: var(--accent-primary);">Blender</a></li>
-                    <li>Select mesh → Modifiers → Add "Decimate" modifier</li>
-                    <li>Set ratio to 0.5 (reduces polygons by 50%)</li>
-                    <li>File → Export → glTF 2.0 (.glb)</li>
-                    <li>Enable Draco compression in export settings</li>
-                    <li>Result: Much smaller file that loads in browser!</li>
-                </ol>
-
-                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Optimization Tips</h4>
-                <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
-                    <li><strong>Use GLB format</strong> instead of GLTF (binary, smaller)</li>
-                    <li><strong>Enable Draco compression</strong> (reduces file size by 80-90%)</li>
-                    <li><strong>Resize textures</strong> to max 2048x2048 pixels</li>
-                    <li><strong>Reduce polygon count</strong> for web (details won't show on small screens)</li>
-                    <li><strong>Target size:</strong> Under 50MB per model for web viewing</li>
-                </ul>
-
-                <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 0.5rem; border-left: 3px solid var(--accent-primary);">
-                    <strong>📚 Resources:</strong><br>
-                    <a href="https://gltf-transform.dev/" target="_blank" style="color: var(--accent-primary);">gltf-transform.dev</a> •
-                    <a href="https://github.khronos.org/glTF-Project-Explorer/" target="_blank" style="color: var(--accent-primary);">glTF Tools</a> •
-                    <a href="https://modelviewer.dev/" target="_blank" style="color: var(--accent-primary);">model-viewer docs</a>
-                </p>
-            </div>
-
             <p>FTC Robot Portfolio &copy; 2025 | Built with 3D models and passion for robotics</p>
             <p style="margin-top: 0.5rem; font-size: 0.8rem;">
-                Download models and view in Blender or other 3D software for best experience
+                Interact with models: Click and drag to rotate • Scroll to zoom • Right-click to pan
             </p>
         </footer>
     </div>
 
     <script>
-        // Load model on demand (lazy loading)
-        function loadModel(button) {
-            const viewer = button.closest('model-viewer');
-            const modelUrl = viewer.getAttribute('data-src');
-
-            // Replace button with loading indicator
-            button.outerHTML = `
-                <div class="loading-indicator">
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                        <div class="spinner"></div>
-                        <div>Loading 3D Model...</div>
-                        <small style="font-size: 0.85rem; opacity: 0.8;">This may take a minute...</small>
-                    </div>
-                </div>
-            `;
-
-            // Start loading the model
-            viewer.setAttribute('src', modelUrl);
-        }
-
-        // Add error handling for model loading
+        // Enhanced model viewer functionality
         document.addEventListener('DOMContentLoaded', function() {
             const modelViewers = document.querySelectorAll('model-viewer');
-            let errorCount = 0;
 
             modelViewers.forEach((viewer, index) => {
                 viewer.addEventListener('load', () => {
-                    console.log(`✅ Model ${index + 1} loaded successfully!`);
+                    console.log(`✅ Model ${index + 1} loaded successfully`);
                     const loadingIndicator = viewer.querySelector('.loading-indicator');
                     if (loadingIndicator) {
                         loadingIndicator.style.display = 'none';
@@ -708,42 +601,29 @@ gltf-transform optimize lebot-james.gltf lebot-james-web.glb \
                     console.error(`❌ Error loading model ${index + 1}:`, event);
                     const loadingIndicator = viewer.querySelector('.loading-indicator');
                     if (loadingIndicator) {
-                        loadingIndicator.innerHTML = `
-                            <div style="text-align: center; padding: 1rem;">
-                                ❌ Failed to Load<br>
-                                <small style="font-size: 0.8rem; opacity: 0.9;">Model too large or network error</small><br>
-                                <button onclick="location.reload()"
-                                        style="margin-top: 0.5rem; padding: 0.4rem 1rem; background: var(--accent-primary); color: var(--bg-primary); border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; font-size: 0.85rem;">
-                                    Retry
-                                </button>
-                            </div>
-                        `;
+                        loadingIndicator.innerHTML = '⚠️ Failed to load model<br><small>Check console for details</small>';
                         loadingIndicator.style.color = '#ff4444';
                     }
                 });
 
-                // Add progress tracking
                 viewer.addEventListener('progress', (event) => {
                     const progress = event.detail.totalProgress;
-                    const percent = Math.round(progress * 100);
-                    console.log(`📦 Model ${index + 1} loading: ${percent}%`);
-
-                    const loadingIndicator = viewer.querySelector('.loading-indicator');
-                    if (loadingIndicator && progress > 0 && progress < 1) {
-                        loadingIndicator.innerHTML = `
-                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                                <div class="spinner"></div>
-                                <div>Loading: ${percent}%</div>
-                                <small style="font-size: 0.85rem; opacity: 0.8;">Please wait...</small>
-                            </div>
-                        `;
+                    if (progress < 1) {
+                        console.log(`Model ${index + 1} loading: ${Math.round(progress * 100)}%`);
                     }
                 });
             });
 
-            console.log('%c🚀 FTC Robot Portfolio Ready!', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
-            console.log('%cClick any "Load 3D Model" button to view a robot.', 'color: #b8c1ec; font-size: 12px;');
-            console.log('%c⚠️ Note: Models are 500-800MB each. Load one at a time!', 'color: #ffaa00; font-size: 12px;');
+            // Add smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
         });
     </script>
 </body>
