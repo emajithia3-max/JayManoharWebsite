@@ -390,6 +390,16 @@
         <header role="banner">
             <h1>FTC Robot Portfolio</h1>
             <p class="subtitle">Interactive 3D Showcase of Competition Robots</p>
+
+            <div style="max-width: 800px; margin: 1.5rem auto; padding: 1rem 1.5rem; background: rgba(255, 170, 0, 0.15); border-left: 4px solid #ffaa00; border-radius: 0.5rem; text-align: left;">
+                <strong style="color: #ffaa00;">⚠️ Important: Model File Sizes</strong>
+                <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+                    These are high-fidelity CAD models (500-800MB each). Most browsers will crash trying to load them directly.
+                    <strong>We recommend downloading</strong> the models and viewing them in dedicated 3D software like
+                    <a href="https://www.blender.org/" target="_blank" style="color: var(--accent-primary);">Blender</a> or
+                    a GLTF viewer. Click the download button on each card.
+                </p>
+            </div>
         </header>
 
         <main role="main">
@@ -412,11 +422,16 @@
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
-                                <div class="load-icon">▶</div>
-                                <div>Load 3D Model</div>
-                                <small style="font-size: 0.8rem; opacity: 0.9;">495 MB</small>
-                            </button>
+                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
+                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.gltf" download class="load-model-btn" style="text-decoration: none;">
+                                    <div class="load-icon">⬇</div>
+                                    <div>Download Model</div>
+                                    <small style="font-size: 0.8rem; opacity: 0.9;">495 MB GLTF</small>
+                                </a>
+                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
+                                </button>
+                            </div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -461,11 +476,16 @@
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
-                                <div class="load-icon">▶</div>
-                                <div>Load 3D Model</div>
-                                <small style="font-size: 0.8rem; opacity: 0.9;">865 MB</small>
-                            </button>
+                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
+                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/thunder.gltf" download class="load-model-btn" style="text-decoration: none;">
+                                    <div class="load-icon">⬇</div>
+                                    <div>Download Model</div>
+                                    <small style="font-size: 0.8rem; opacity: 0.9;">865 MB GLTF</small>
+                                </a>
+                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
+                                </button>
+                            </div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -509,11 +529,16 @@
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
-                                <div class="load-icon">▶</div>
-                                <div>Load 3D Model</div>
-                                <small style="font-size: 0.8rem; opacity: 0.9;">718 MB</small>
-                            </button>
+                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
+                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/volt-assembly-extended.gltf" download class="load-model-btn" style="text-decoration: none;">
+                                    <div class="load-icon">⬇</div>
+                                    <div>Download Model</div>
+                                    <small style="font-size: 0.8rem; opacity: 0.9;">718 MB GLTF</small>
+                                </a>
+                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
+                                </button>
+                            </div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -557,11 +582,16 @@
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
-                                <div class="load-icon">▶</div>
-                                <div>Load 3D Model</div>
-                                <small style="font-size: 0.8rem; opacity: 0.9;">678 MB</small>
-                            </button>
+                            <div slot="poster" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%;">
+                                <a href="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/fiber-eel.gltf" download class="load-model-btn" style="text-decoration: none;">
+                                    <div class="load-icon">⬇</div>
+                                    <div>Download Model</div>
+                                    <small style="font-size: 0.8rem; opacity: 0.9;">678 MB GLTF</small>
+                                </a>
+                                <button class="load-model-btn" onclick="loadModel(this)" style="background: rgba(255, 170, 0, 0.2); border: 2px solid #ffaa00; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+                                    <div style="font-size: 1rem;">⚠️ Try Load (May Crash)</div>
+                                </button>
+                            </div>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -588,9 +618,53 @@
         </main>
 
         <footer role="contentinfo">
+            <div style="max-width: 900px; margin: 0 auto 2rem; padding: 2rem; background: var(--bg-card); border-radius: 1rem; border: 1px solid var(--border-color); text-align: left;">
+                <h3 style="color: var(--accent-primary); margin-bottom: 1rem;">💡 How to Optimize Models for Web</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Your current models are 500-800MB each - too large for browsers. Here's how to create web-friendly versions:
+                </p>
+
+                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Using gltf-transform (Recommended)</h4>
+                <pre style="background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.9rem;"><code># Install
+npm install -g @gltf-transform/cli
+
+# Optimize with Draco compression
+gltf-transform optimize lebot-james.gltf lebot-james-web.glb \
+  --compress draco \
+  --texture-compress webp
+
+# Target: Reduce 500MB → 20-50MB</code></pre>
+
+                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Using Blender</h4>
+                <ol style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Open model in <a href="https://www.blender.org/" target="_blank" style="color: var(--accent-primary);">Blender</a></li>
+                    <li>Select mesh → Modifiers → Add "Decimate" modifier</li>
+                    <li>Set ratio to 0.5 (reduces polygons by 50%)</li>
+                    <li>File → Export → glTF 2.0 (.glb)</li>
+                    <li>Enable Draco compression in export settings</li>
+                    <li>Result: Much smaller file that loads in browser!</li>
+                </ol>
+
+                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Optimization Tips</h4>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Use GLB format</strong> instead of GLTF (binary, smaller)</li>
+                    <li><strong>Enable Draco compression</strong> (reduces file size by 80-90%)</li>
+                    <li><strong>Resize textures</strong> to max 2048x2048 pixels</li>
+                    <li><strong>Reduce polygon count</strong> for web (details won't show on small screens)</li>
+                    <li><strong>Target size:</strong> Under 50MB per model for web viewing</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 0.5rem; border-left: 3px solid var(--accent-primary);">
+                    <strong>📚 Resources:</strong><br>
+                    <a href="https://gltf-transform.dev/" target="_blank" style="color: var(--accent-primary);">gltf-transform.dev</a> •
+                    <a href="https://github.khronos.org/glTF-Project-Explorer/" target="_blank" style="color: var(--accent-primary);">glTF Tools</a> •
+                    <a href="https://modelviewer.dev/" target="_blank" style="color: var(--accent-primary);">model-viewer docs</a>
+                </p>
+            </div>
+
             <p>FTC Robot Portfolio &copy; 2025 | Built with 3D models and passion for robotics</p>
             <p style="margin-top: 0.5rem; font-size: 0.8rem;">
-                Interact with models: Click and drag to rotate • Scroll to zoom • Right-click to pan
+                Download models and view in Blender or other 3D software for best experience
             </p>
         </footer>
     </div>
