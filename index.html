@@ -226,6 +226,48 @@
             z-index: 1;
         }
 
+        /* Load Model Button */
+        .load-model-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--text-primary);
+            border: none;
+            padding: 1.5rem 2.5rem;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        .load-model-btn:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 212, 255, 0.5);
+        }
+
+        .load-model-btn:active {
+            transform: translate(-50%, -50%) scale(0.98);
+        }
+
+        .load-icon {
+            font-size: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
         /* Spinner Animation */
         .spinner {
             width: 40px;
@@ -356,7 +398,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-1-name">
                     <div class="viewer-container">
                         <model-viewer
-                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.gltf"
+                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/lebot-james.gltf"
                             alt="3D model of Lebot James FTC robot"
                             auto-rotate
                             camera-controls
@@ -364,14 +406,17 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
-                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
+                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
+                                <div class="load-icon">▶</div>
+                                <div>Load 3D Model</div>
+                                <small style="font-size: 0.8rem; opacity: 0.9;">495 MB</small>
+                            </button>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -402,7 +447,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-2-name">
                     <div class="viewer-container">
                         <model-viewer
-                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/thunder.gltf"
+                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/thunder.gltf"
                             alt="3D model of Thunder FTC robot"
                             auto-rotate
                             camera-controls
@@ -410,14 +455,17 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
-                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
+                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
+                                <div class="load-icon">▶</div>
+                                <div>Load 3D Model</div>
+                                <small style="font-size: 0.8rem; opacity: 0.9;">865 MB</small>
+                            </button>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -447,7 +495,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-3-name">
                     <div class="viewer-container">
                         <model-viewer
-                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/volt-assembly-extended.gltf"
+                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/volt-assembly-extended.gltf"
                             alt="3D model of Volt FTC robot"
                             auto-rotate
                             camera-controls
@@ -455,14 +503,17 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
-                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
+                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
+                                <div class="load-icon">▶</div>
+                                <div>Load 3D Model</div>
+                                <small style="font-size: 0.8rem; opacity: 0.9;">718 MB</small>
+                            </button>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -492,7 +543,7 @@
                 <article class="robot-card" role="article" aria-labelledby="robot-4-name">
                     <div class="viewer-container">
                         <model-viewer
-                            src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/fiber-eel.gltf"
+                            data-src="https://pub-5c235c28472546da987ee565ee1a586e.r2.dev/fiber-eel.gltf"
                             alt="3D model of Fiber Eel FTC robot concept"
                             auto-rotate
                             camera-controls
@@ -500,14 +551,17 @@
                             exposure="1"
                             shadow-softness="0.5"
                             environment-image="neutral"
-                            loading="eager"
                             ar
                             ar-modes="webxr scene-viewer quick-look"
                             camera-orbit="45deg 75deg 2.5m"
                             min-camera-orbit="auto auto 1m"
                             max-camera-orbit="auto auto 5m"
                             interaction-prompt="auto">
-                            <div class="loading-indicator" slot="poster">Loading 3D Model...</div>
+                            <button class="load-model-btn" slot="poster" onclick="loadModel(this)">
+                                <div class="load-icon">▶</div>
+                                <div>Load 3D Model</div>
+                                <small style="font-size: 0.8rem; opacity: 0.9;">678 MB</small>
+                            </button>
                         </model-viewer>
                     </div>
                     <div class="card-content">
@@ -542,291 +596,81 @@
     </div>
 
     <script>
+        // Load model on demand (lazy loading)
+        function loadModel(button) {
+            const viewer = button.closest('model-viewer');
+            const modelUrl = viewer.getAttribute('data-src');
+
+            // Replace button with loading indicator
+            button.outerHTML = `
+                <div class="loading-indicator">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                        <div class="spinner"></div>
+                        <div>Loading 3D Model...</div>
+                        <small style="font-size: 0.85rem; opacity: 0.8;">This may take a minute...</small>
+                    </div>
+                </div>
+            `;
+
+            // Start loading the model
+            viewer.setAttribute('src', modelUrl);
+        }
+
         // Add error handling for model loading
         document.addEventListener('DOMContentLoaded', function() {
             const modelViewers = document.querySelectorAll('model-viewer');
             let errorCount = 0;
 
             modelViewers.forEach((viewer, index) => {
-                let loaded = false;
-                let timedOut = false;
-
-                // Add spinning animation to loading indicator
-                const loadingIndicator = viewer.querySelector('.loading-indicator');
-                if (loadingIndicator) {
-                    loadingIndicator.innerHTML = `
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                            <div class="spinner"></div>
-                            <div>Loading 3D Model...</div>
-                        </div>
-                    `;
-                }
-
                 viewer.addEventListener('load', () => {
-                    loaded = true;
-                    console.log(`✅ Model ${index + 1} loaded successfully`);
+                    console.log(`✅ Model ${index + 1} loaded successfully!`);
+                    const loadingIndicator = viewer.querySelector('.loading-indicator');
                     if (loadingIndicator) {
                         loadingIndicator.style.display = 'none';
                     }
                 });
 
                 viewer.addEventListener('error', (event) => {
-                    errorCount++;
-                    loaded = true; // Prevent timeout from also triggering
                     console.error(`❌ Error loading model ${index + 1}:`, event);
-                    console.error(`%cCORS headers are missing on your R2 bucket!`, 'color: #ff4444; font-size: 14px; font-weight: bold;');
-                    console.log(`%cClick the red banner or check the popup for the fix`, 'color: #00d4ff; font-size: 12px;');
-
+                    const loadingIndicator = viewer.querySelector('.loading-indicator');
                     if (loadingIndicator) {
                         loadingIndicator.innerHTML = `
                             <div style="text-align: center; padding: 1rem;">
                                 ❌ Failed to Load<br>
-                                <small style="font-size: 0.8rem; opacity: 0.9;">CORS error from R2 bucket</small><br>
-                                <button onclick="document.getElementById('cors-solution').style.display='block'"
+                                <small style="font-size: 0.8rem; opacity: 0.9;">Model too large or network error</small><br>
+                                <button onclick="location.reload()"
                                         style="margin-top: 0.5rem; padding: 0.4rem 1rem; background: var(--accent-primary); color: var(--bg-primary); border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; font-size: 0.85rem;">
-                                    Show Fix →
+                                    Retry
                                 </button>
                             </div>
                         `;
                         loadingIndicator.style.color = '#ff4444';
-                    }
-
-                    // Show CORS help banner after first error
-                    if (errorCount === 1) {
-                        showCORSHelp();
                     }
                 });
 
                 // Add progress tracking
                 viewer.addEventListener('progress', (event) => {
                     const progress = event.detail.totalProgress;
-                    if (loadingIndicator && progress < 1) {
-                        const percent = Math.round(progress * 100);
-                        console.log(`Model ${index + 1} loading: ${percent}%`);
-                    }
-                });
+                    const percent = Math.round(progress * 100);
+                    console.log(`📦 Model ${index + 1} loading: ${percent}%`);
 
-                // Timeout after 10 seconds
-                setTimeout(() => {
-                    if (!loaded && !timedOut) {
-                        timedOut = true;
-                        console.warn(`⏱️ Model ${index + 1} taking longer than expected...`);
-                        if (loadingIndicator) {
-                            loadingIndicator.innerHTML = `
-                                <div style="text-align: center;">
-                                    <div class="spinner"></div>
-                                    <div style="margin-top: 0.5rem;">Still loading...</div>
-                                    <small style="font-size: 0.75rem; opacity: 0.8;">This may indicate a CORS issue</small>
-                                </div>
-                            `;
-                        }
-
-                        // Show help after 10 seconds of loading
-                        if (errorCount === 0) {
-                            showCORSHelp();
-                        }
-                    }
-                }, 10000);
-
-                // Test if model can be fetched
-                setTimeout(() => {
-                    const src = viewer.getAttribute('src');
-                    fetch(src, { mode: 'cors', method: 'HEAD' })
-                        .then(response => {
-                            if (!response.ok) {
-                                console.error(`❌ HTTP ${response.status} for model ${index + 1}`);
-                                console.log(`URL: ${src}`);
-                            } else {
-                                console.log(`✅ Model ${index + 1} URL is accessible`);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(`❌ CORS Error for model ${index + 1}:`, error.message);
-                            console.log(`%cFix: Add CORS headers to R2 bucket`, 'color: #00d4ff; font-weight: bold; font-size: 14px;');
-                            console.log(`%cSee instructions by clicking "Show Solution"`, 'color: #00d4ff;');
-
-                            // Trigger error banner
-                            if (errorCount === 0) {
-                                errorCount++;
-                                showCORSHelp();
-                            }
-                        });
-                }, 1000);
-            });
-
-            function showCORSHelp() {
-                const banner = document.createElement('div');
-                banner.id = 'cors-help-banner';
-                banner.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
-                    color: white;
-                    padding: 1rem 2rem;
-                    border-radius: 0.75rem;
-                    box-shadow: 0 8px 32px rgba(255, 68, 68, 0.4);
-                    z-index: 10000;
-                    max-width: 90%;
-                    text-align: center;
-                    animation: slideDown 0.5s ease-out;
-                `;
-                banner.innerHTML = `
-                    <strong>⚠️ CORS Error Detected</strong><br>
-                    <small style="font-size: 0.85rem;">Models cannot load due to missing CORS headers on R2 bucket</small><br>
-                    <button onclick="document.getElementById('cors-help-banner').remove(); document.getElementById('cors-solution').style.display='block';"
-                            style="margin-top: 0.5rem; padding: 0.4rem 1rem; background: white; color: #cc0000; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
-                        Show Solution
-                    </button>
-                `;
-                document.body.appendChild(banner);
-            }
-
-            // Add smooth scroll behavior
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const loadingIndicator = viewer.querySelector('.loading-indicator');
+                    if (loadingIndicator && progress > 0 && progress < 1) {
+                        loadingIndicator.innerHTML = `
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                                <div class="spinner"></div>
+                                <div>Loading: ${percent}%</div>
+                                <small style="font-size: 0.85rem; opacity: 0.8;">Please wait...</small>
+                            </div>
+                        `;
                     }
                 });
             });
 
-            // Optional: Log when models are ready for interaction
-            modelViewers.forEach((viewer, index) => {
-                viewer.addEventListener('model-visibility', (event) => {
-                    if (event.detail.visible) {
-                        console.log(`Model ${index + 1} is now visible and interactive`);
-                    }
-                });
-            });
+            console.log('%c🚀 FTC Robot Portfolio Ready!', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
+            console.log('%cClick any "Load 3D Model" button to view a robot.', 'color: #b8c1ec; font-size: 12px;');
+            console.log('%c⚠️ Note: Models are 500-800MB each. Load one at a time!', 'color: #ffaa00; font-size: 12px;');
         });
     </script>
-
-    <style>
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        #cors-solution {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-card);
-            border: 2px solid var(--accent-primary);
-            border-radius: 1rem;
-            padding: 2rem;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            z-index: 10001;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        #cors-solution h3 {
-            color: var(--accent-primary);
-            margin-bottom: 1rem;
-        }
-
-        #cors-solution code {
-            background: var(--bg-secondary);
-            padding: 0.2rem 0.5rem;
-            border-radius: 0.3rem;
-            font-size: 0.9rem;
-        }
-
-        #cors-solution pre {
-            background: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        #cors-solution ol {
-            margin-left: 1.5rem;
-            line-height: 2;
-        }
-
-        #cors-solution button {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            border: none;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 1rem;
-        }
-    </style>
-
-    <div id="cors-solution">
-        <h3>🔧 Fix: "Failed to load model"</h3>
-
-        <div style="background: rgba(255, 68, 68, 0.1); padding: 1rem; border-radius: 0.5rem; border-left: 3px solid #ff4444; margin-bottom: 1rem;">
-            <strong>Why this happens:</strong><br>
-            Your R2 bucket is publicly accessible (URLs work when opened directly), but it's missing
-            <strong>CORS headers</strong> that allow browsers to load models via JavaScript.
-        </div>
-
-        <h4 style="color: var(--accent-primary); margin-top: 1.5rem;">Quick Fix (2 minutes):</h4>
-
-        <ol style="line-height: 2.2;">
-            <li>Open <a href="https://dash.cloudflare.com" target="_blank" style="color: var(--accent-primary);">Cloudflare Dashboard</a></li>
-            <li>Navigate: <strong>R2</strong> → <strong>pub-5c235c28472546da987ee565ee1a586e</strong></li>
-            <li>Click the <strong>Settings</strong> tab</li>
-            <li>Find <strong>"CORS Policy"</strong> section (scroll down)</li>
-            <li>Click <strong>"Add CORS Policy"</strong> or <strong>"Edit"</strong></li>
-            <li>Paste this JSON configuration:</li>
-        </ol>
-
-        <pre style="background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; border: 1px solid var(--accent-primary);"><code>[
-  {
-    "AllowedOrigins": ["*"],
-    "AllowedMethods": ["GET", "HEAD"],
-    "AllowedHeaders": ["*"],
-    "ExposeHeaders": ["Content-Length", "Content-Type"],
-    "MaxAgeSeconds": 3600
-  }
-]</code></pre>
-
-        <ol start="7" style="line-height: 2.2;">
-            <li>Click <strong>Save</strong></li>
-            <li><strong>Refresh this page</strong> and the models will load! ✨</li>
-        </ol>
-
-        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid var(--border-color);">
-
-        <h4 style="color: var(--accent-primary);">Alternative: Using Wrangler CLI</h4>
-        <p>Create a file <code>cors.json</code> with the config above, then run:</p>
-        <pre style="background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem;"><code>wrangler r2 bucket cors put pub-5c235c28472546da987ee565ee1a586e \
-  --cors-config cors.json</code></pre>
-
-        <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
-            <button onclick="document.getElementById('cors-solution').style.display='none'"
-                    style="background: var(--accent-primary); color: var(--bg-primary); border: none; padding: 0.6rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
-                Close
-            </button>
-            <button onclick="window.open('https://dash.cloudflare.com', '_blank')"
-                    style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--accent-primary); padding: 0.6rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
-                Open Cloudflare Dashboard
-            </button>
-        </div>
-
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-            <strong>Note:</strong> After saving CORS settings, it may take a few seconds to propagate. Refresh this page to test.
-        </p>
-    </div>
 </body>
 </html>
