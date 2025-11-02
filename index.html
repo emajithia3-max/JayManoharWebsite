@@ -574,8 +574,20 @@
                     errorCount++;
                     loaded = true; // Prevent timeout from also triggering
                     console.error(`❌ Error loading model ${index + 1}:`, event);
+                    console.error(`%cCORS headers are missing on your R2 bucket!`, 'color: #ff4444; font-size: 14px; font-weight: bold;');
+                    console.log(`%cClick the red banner or check the popup for the fix`, 'color: #00d4ff; font-size: 12px;');
+
                     if (loadingIndicator) {
-                        loadingIndicator.innerHTML = '⚠️ CORS Error<br><small style="font-size: 0.8rem;">Click "Show Solution" below</small>';
+                        loadingIndicator.innerHTML = `
+                            <div style="text-align: center; padding: 1rem;">
+                                ❌ Failed to Load<br>
+                                <small style="font-size: 0.8rem; opacity: 0.9;">CORS error from R2 bucket</small><br>
+                                <button onclick="document.getElementById('cors-solution').style.display='block'"
+                                        style="margin-top: 0.5rem; padding: 0.4rem 1rem; background: var(--accent-primary); color: var(--bg-primary); border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; font-size: 0.85rem;">
+                                    Show Fix →
+                                </button>
+                            </div>
+                        `;
                         loadingIndicator.style.color = '#ff4444';
                     }
 
@@ -760,31 +772,61 @@
     </style>
 
     <div id="cors-solution">
-        <h3>🔧 How to Fix CORS Error</h3>
-        <p>Your R2 bucket needs CORS configuration to allow web browsers to load the 3D models.</p>
+        <h3>🔧 Fix: "Failed to load model"</h3>
 
-        <ol>
-            <li>Log in to <strong>Cloudflare Dashboard</strong></li>
-            <li>Go to <strong>R2 → Your Bucket</strong></li>
-            <li>Click <strong>Settings</strong> tab</li>
-            <li>Scroll to <strong>CORS Policy</strong></li>
-            <li>Add this configuration:</li>
+        <div style="background: rgba(255, 68, 68, 0.1); padding: 1rem; border-radius: 0.5rem; border-left: 3px solid #ff4444; margin-bottom: 1rem;">
+            <strong>Why this happens:</strong><br>
+            Your R2 bucket is publicly accessible (URLs work when opened directly), but it's missing
+            <strong>CORS headers</strong> that allow browsers to load models via JavaScript.
+        </div>
+
+        <h4 style="color: var(--accent-primary); margin-top: 1.5rem;">Quick Fix (2 minutes):</h4>
+
+        <ol style="line-height: 2.2;">
+            <li>Open <a href="https://dash.cloudflare.com" target="_blank" style="color: var(--accent-primary);">Cloudflare Dashboard</a></li>
+            <li>Navigate: <strong>R2</strong> → <strong>pub-5c235c28472546da987ee565ee1a586e</strong></li>
+            <li>Click the <strong>Settings</strong> tab</li>
+            <li>Find <strong>"CORS Policy"</strong> section (scroll down)</li>
+            <li>Click <strong>"Add CORS Policy"</strong> or <strong>"Edit"</strong></li>
+            <li>Paste this JSON configuration:</li>
         </ol>
 
-        <pre><code>[
+        <pre style="background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; border: 1px solid var(--accent-primary);"><code>[
   {
     "AllowedOrigins": ["*"],
-    "AllowedMethods": ["GET"],
+    "AllowedMethods": ["GET", "HEAD"],
     "AllowedHeaders": ["*"],
-    "ExposeHeaders": [],
+    "ExposeHeaders": ["Content-Length", "Content-Type"],
     "MaxAgeSeconds": 3600
   }
 ]</code></pre>
 
-        <p><strong>Or use the Cloudflare API:</strong></p>
-        <pre><code>wrangler r2 bucket cors put YOUR_BUCKET_NAME --cors-config cors.json</code></pre>
+        <ol start="7" style="line-height: 2.2;">
+            <li>Click <strong>Save</strong></li>
+            <li><strong>Refresh this page</strong> and the models will load! ✨</li>
+        </ol>
 
-        <button onclick="document.getElementById('cors-solution').style.display='none'">Close</button>
+        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid var(--border-color);">
+
+        <h4 style="color: var(--accent-primary);">Alternative: Using Wrangler CLI</h4>
+        <p>Create a file <code>cors.json</code> with the config above, then run:</p>
+        <pre style="background: var(--bg-primary); padding: 1rem; border-radius: 0.5rem;"><code>wrangler r2 bucket cors put pub-5c235c28472546da987ee565ee1a586e \
+  --cors-config cors.json</code></pre>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
+            <button onclick="document.getElementById('cors-solution').style.display='none'"
+                    style="background: var(--accent-primary); color: var(--bg-primary); border: none; padding: 0.6rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
+                Close
+            </button>
+            <button onclick="window.open('https://dash.cloudflare.com', '_blank')"
+                    style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--accent-primary); padding: 0.6rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
+                Open Cloudflare Dashboard
+            </button>
+        </div>
+
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+            <strong>Note:</strong> After saving CORS settings, it may take a few seconds to propagate. Refresh this page to test.
+        </p>
     </div>
 </body>
 </html>
