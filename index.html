@@ -226,6 +226,20 @@
             z-index: 1;
         }
 
+        /* Spinner Animation */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 212, 255, 0.1);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Animations */
         @keyframes fadeInDown {
             from {
@@ -534,9 +548,23 @@
             let errorCount = 0;
 
             modelViewers.forEach((viewer, index) => {
+                let loaded = false;
+                let timedOut = false;
+
+                // Add spinning animation to loading indicator
+                const loadingIndicator = viewer.querySelector('.loading-indicator');
+                if (loadingIndicator) {
+                    loadingIndicator.innerHTML = `
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <div class="spinner"></div>
+                            <div>Loading 3D Model...</div>
+                        </div>
+                    `;
+                }
+
                 viewer.addEventListener('load', () => {
-                    console.log(`Model ${index + 1} loaded successfully`);
-                    const loadingIndicator = viewer.querySelector('.loading-indicator');
+                    loaded = true;
+                    console.log(`✅ Model ${index + 1} loaded successfully`);
                     if (loadingIndicator) {
                         loadingIndicator.style.display = 'none';
                     }
@@ -544,10 +572,10 @@
 
                 viewer.addEventListener('error', (event) => {
                     errorCount++;
-                    console.error(`Error loading model ${index + 1}:`, event);
-                    const loadingIndicator = viewer.querySelector('.loading-indicator');
+                    loaded = true; // Prevent timeout from also triggering
+                    console.error(`❌ Error loading model ${index + 1}:`, event);
                     if (loadingIndicator) {
-                        loadingIndicator.innerHTML = '⚠️ CORS Error<br><small style="font-size: 0.8rem;">See console for details</small>';
+                        loadingIndicator.innerHTML = '⚠️ CORS Error<br><small style="font-size: 0.8rem;">Click "Show Solution" below</small>';
                         loadingIndicator.style.color = '#ff4444';
                     }
 
@@ -557,18 +585,59 @@
                     }
                 });
 
+                // Add progress tracking
+                viewer.addEventListener('progress', (event) => {
+                    const progress = event.detail.totalProgress;
+                    if (loadingIndicator && progress < 1) {
+                        const percent = Math.round(progress * 100);
+                        console.log(`Model ${index + 1} loading: ${percent}%`);
+                    }
+                });
+
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    if (!loaded && !timedOut) {
+                        timedOut = true;
+                        console.warn(`⏱️ Model ${index + 1} taking longer than expected...`);
+                        if (loadingIndicator) {
+                            loadingIndicator.innerHTML = `
+                                <div style="text-align: center;">
+                                    <div class="spinner"></div>
+                                    <div style="margin-top: 0.5rem;">Still loading...</div>
+                                    <small style="font-size: 0.75rem; opacity: 0.8;">This may indicate a CORS issue</small>
+                                </div>
+                            `;
+                        }
+
+                        // Show help after 10 seconds of loading
+                        if (errorCount === 0) {
+                            showCORSHelp();
+                        }
+                    }
+                }, 10000);
+
                 // Test if model can be fetched
                 setTimeout(() => {
                     const src = viewer.getAttribute('src');
-                    fetch(src, { mode: 'cors' })
+                    fetch(src, { mode: 'cors', method: 'HEAD' })
                         .then(response => {
                             if (!response.ok) {
-                                console.error(`HTTP ${response.status} for model ${index + 1}`);
+                                console.error(`❌ HTTP ${response.status} for model ${index + 1}`);
+                                console.log(`URL: ${src}`);
+                            } else {
+                                console.log(`✅ Model ${index + 1} URL is accessible`);
                             }
                         })
                         .catch(error => {
-                            console.error(`CORS Error for model ${index + 1}:`, error.message);
+                            console.error(`❌ CORS Error for model ${index + 1}:`, error.message);
                             console.log(`%cFix: Add CORS headers to R2 bucket`, 'color: #00d4ff; font-weight: bold; font-size: 14px;');
+                            console.log(`%cSee instructions by clicking "Show Solution"`, 'color: #00d4ff;');
+
+                            // Trigger error banner
+                            if (errorCount === 0) {
+                                errorCount++;
+                                showCORSHelp();
+                            }
                         });
                 }, 1000);
             });
